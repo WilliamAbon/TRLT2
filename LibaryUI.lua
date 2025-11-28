@@ -1,8 +1,8 @@
 local UI_TRLT2 = {}
 
 function UI_TRLT2:NambahUI(tinggi)
-	if game.CoreGui:FindFirstChild("SRC_Screen") then
-		game.CoreGui:FindFirstChild("SRC_Screen"):Destroy()
+	if game.CoreGui:FindFirstChild("TRLT_DuaScreen") then
+		game.CoreGui:FindFirstChild("TRLT_DuaScreen"):Destroy()
 	end
 
 	local ScreenGui = Instance.new("ScreenGui")
@@ -25,7 +25,7 @@ function UI_TRLT2:NambahUI(tinggi)
 	local TextLabel_5 = Instance.new("TextLabel")
 
 	local http = game:GetService("HttpService")
-	local w = game:HttpGet("https://raw.githubusercontent.com/WilliamAbon/SRC10101/refs/heads/main/SRC%20Hub%20Yang%20Versi%201.0/Nama.json")
+	local w = game:HttpGet("https://raw.githubusercontent.com/WilliamAbon/TRLT2/refs/heads/main/namaDanVersi.json")
 	local TABLESRC = http:JSONDecode(w)
 
 	local use = game:GetService("UserInputService")
@@ -48,7 +48,7 @@ function UI_TRLT2:NambahUI(tinggi)
 		OpenClose.TextSize = 14.000
 		OpenClose.TextWrapped = true
 
-		UIGradients.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(9, 2, 5)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(9, 39, 16))}
+		UIGradients.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(9, 2, 5)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(39, 8, 8))}
 		UIGradients.Parent = OpenClose
 
 		TextLabel.Parent = OpenClose
@@ -84,7 +84,7 @@ function UI_TRLT2:NambahUI(tinggi)
 		end
 	end
 
-	ScreenGui.Name = "SRC_Screen"
+	ScreenGui.Name = "TRLT_DuaScreen"
 	ScreenGui.Parent = game.CoreGui
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -314,94 +314,9 @@ function UI_TRLT2:NambahUI(tinggi)
 	end)
 end
 
-function UI_TRLT2:NambahTab(Text, Image, pajang)
-	local TextButton = Instance.new("TextButton")
-	local ImageLabel = Instance.new("ImageLabel")
-	local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-	local TextLabel = Instance.new("TextLabel")
-	local UICorner = Instance.new("UICorner")
-	if game.CoreGui:FindFirstChild("SRC_Screen") then
-		local w = game.CoreGui:FindFirstChild("SRC_Screen").MainFrame.FrameKiri.PilihanFrame.ScrollingPilihanFrame
-		TextButton.Parent = w
-		TextButton.BackgroundColor3 = Color3.fromRGB(66, 32, 32)
-		TextButton.BackgroundTransparency = 0.650
-		TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		TextButton.BorderSizePixel = 0
-		TextButton.Size = UDim2.new(0, 200, 0, 50)
-		TextButton.Font = Enum.Font.SourceSans
-		TextButton.Text = ""
-		TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-		TextButton.TextSize = 14.000
-		TextButton.Name = Text.."Button"
 
-		ImageLabel.Parent = TextButton
-		ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		ImageLabel.BackgroundTransparency = 1.000
-		ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ImageLabel.BorderSizePixel = 0
-		ImageLabel.Size = UDim2.new(1, 0, 1, 0)
-		ImageLabel.Image = "rbxassetid://"..Image
 
-		UIAspectRatioConstraint.Parent = ImageLabel
-
-		TextLabel.Parent = TextButton
-		TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel.BackgroundTransparency = 1.000
-		TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		TextLabel.BorderSizePixel = 0
-		TextLabel.Position = UDim2.new(0.417075217, 0, 0, 0)
-		TextLabel.Size = UDim2.new(0, 62, 0, 50)
-		TextLabel.Font = Enum.Font.SourceSans
-		TextLabel.Text = Text
-		TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel.TextScaled = true
-		TextLabel.TextSize = 27.000
-		TextLabel.TextWrapped = true
-
-		UICorner.CornerRadius = UDim.new(0, 3)
-		UICorner.Parent = TextButton
-		for _,v in pairs(game.CoreGui:FindFirstChild("SRC_Screen").MainFrame.TabFrame:GetChildren()) do
-			v.Visible = false
-		end
-		local ScrollingFrame = Instance.new("ScrollingFrame")
-
-		ScrollingFrame.Parent = game.CoreGui:FindFirstChild("SRC_Screen").MainFrame.TabFrame
-		ScrollingFrame.Active = true
-		ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		ScrollingFrame.BackgroundTransparency = 1.000
-		ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ScrollingFrame.BorderSizePixel = 0
-		ScrollingFrame.Size = UDim2.new(0.99000001, 0, 1, 0)
-		ScrollingFrame.BottomImage = "rbxassetid://17582895164"
-		ScrollingFrame.MidImage = "rbxassetid://15307205005"
-		ScrollingFrame.ScrollBarThickness = 5
-		ScrollingFrame.CanvasSize = UDim2.new(0, 0, pajang, 0)
-		ScrollingFrame.TopImage = "rbxassetid://17582902069"
-		ScrollingFrame.Name = Text.."ScrollingFrame"
-
-		local s = Instance.new("UIListLayout")
-		s.Wraps = true
-		s.Padding = UDim.new(0,5)
-		s.Parent = ScrollingFrame
-
-		local ui = Instance.new("UIPadding")
-		ui.Parent = ScrollingFrame---------|
-		ui.PaddingBottom = UDim.new(0, 3)--|
-		ui.PaddingRight  = UDim.new(0, 8)--|
-		ui.PaddingLeft   = UDim.new(0, 3)--|
-		ui.PaddingTop    = UDim.new(0, 3)--|
-		game:GetService("CoreGui").SRC_Screen.MainFrame.NamaTab.Text = Text.."Tab"
-		TextButton.MouseButton1Click:Connect(function()
-			for _,v in pairs(game.CoreGui:FindFirstChild("SRC_Screen").MainFrame.TabFrame:GetChildren()) do
-				v.Visible = false
-			end
-			ScrollingFrame.Visible = true
-			game:GetService("CoreGui").SRC_Screen.MainFrame.NamaTab.Text = TextLabel.Text.."Tab"
-		end)
-	end
-end
-
-function UI_TRLT2:OnOff(NameParent, default, Text, funct)
+function UI_TRLT2:OnOff(NameParent, Text, default, funct)
 
 	local TextButton = Instance.new("TextButton")
 	local TextLabel = Instance.new("TextLabel")
@@ -414,18 +329,19 @@ function UI_TRLT2:OnOff(NameParent, default, Text, funct)
 	local UICorner_3 = Instance.new("UICorner")
 
 	local fr = Instance.new("Frame")
-	fr.Parent = game.CoreGui.SRC_Screen.MainFrame.TabFrame[NameParent.."ScrollingFrame"]
-	fr.BackgroundTransparency = 1
+	fr.Parent = game.CoreGui.TRLT_DuaScreen.MainFrame.TabFrame[NameParent.."ScrollingFrame"]
+	fr.BackgroundTransparency = 0.55
 	fr.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
 	fr.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	fr.BorderSizePixel = 0
-	fr.Size = UDim2.new(1, 0, 0, 50)
+	fr.Size = UDim2.new(1, 0, 0, 40)
 
 	TextButton.Parent = fr
 	TextButton.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
 	TextButton.BackgroundTransparency = 0.5
 	TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextButton.BorderSizePixel = 0
+	TextButton.Transparency = 1
 	TextButton.Size = UDim2.new(1, 0, 1, 0)
 	TextButton.Font = Enum.Font.SourceSans
 	TextButton.Text = ""
@@ -437,8 +353,9 @@ function UI_TRLT2:OnOff(NameParent, default, Text, funct)
 	TextLabel.BackgroundTransparency = 1.000
 	TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextLabel.BorderSizePixel = 0
-	TextLabel.Position = UDim2.new(0.0302048419, 0, 0.108907469, 0)
-	TextLabel.Size = UDim2.new(0, 285, 0, 38)
+	TextLabel.AnchorPoint = Vector2.new(0, 0.5)
+	TextLabel.Position = UDim2.new(0.03, 0, 0.5, 0)
+	TextLabel.Size = UDim2.new(0, 293,0, 38)
 	TextLabel.Font = Enum.Font.RobotoMono
 	TextLabel.Text = Text
 	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -453,8 +370,8 @@ function UI_TRLT2:OnOff(NameParent, default, Text, funct)
 	Frame.BackgroundTransparency = 0.350
 	Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Frame.BorderSizePixel = 0
-	Frame.Position = UDim2.new(0.870000005, 0, 0.484453708, 0)
-	Frame.Size = UDim2.new(0.218973741, 0, 0.768907368, 0)
+	Frame.Position = UDim2.new(0.888, 0, 0.5, 0)
+	Frame.Size = UDim2.new(0.18, 0, 0.769, 0)
 
 	UICorner.CornerRadius = UDim.new(1, 0)
 	UICorner.Parent = Frame
@@ -478,12 +395,12 @@ function UI_TRLT2:OnOff(NameParent, default, Text, funct)
 	UIAspectRatioConstraint.Parent = Frame_2
 
 	UIPadding.Parent = Frame
-	UIPadding.PaddingBottom = UDim.new(0, 3)
-	UIPadding.PaddingLeft = UDim.new(0, 3)
-	UIPadding.PaddingRight = UDim.new(0, 3)
-	UIPadding.PaddingTop = UDim.new(0, 3)
+	UIPadding.PaddingBottom = UDim.new(0, 2)
+	UIPadding.PaddingLeft = UDim.new(0, 2)
+	UIPadding.PaddingRight = UDim.new(0, 2)
+	UIPadding.PaddingTop = UDim.new(0, 2)
 
-	UICorner_3.Parent = TextButton
+	UICorner_3.Parent = fr
 
 	local i = default
 	if funct then
@@ -507,7 +424,7 @@ function UI_TRLT2:OnOff(NameParent, default, Text, funct)
 	end)
 end
 
-function UI_TRLT2:Slider(Min, Max, default, Title, TaruDimana, smooht, func)
+function UI_TRLT2:Slider(TaruDimana, Title, Min, Max, default, smooht, func)
 	local TextButton = Instance.new("Frame")
 	local TextLabel = Instance.new("TextLabel")
 	local FrameAreaSlider = Instance.new("Frame")
@@ -518,20 +435,21 @@ function UI_TRLT2:Slider(Min, Max, default, Title, TaruDimana, smooht, func)
 	local UICorner_3 = Instance.new("UICorner")
 	local OutputNum = Instance.new("TextLabel")
 
-	TextButton.Parent = game.CoreGui.SRC_Screen.MainFrame.TabFrame[TaruDimana.."ScrollingFrame"]
+	TextButton.Parent = game.CoreGui.TRLT_DuaScreen.MainFrame.TabFrame[TaruDimana.."ScrollingFrame"]
 	TextButton.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
 	TextButton.BackgroundTransparency = 0.5
 	TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextButton.BorderSizePixel = 0
-	TextButton.Size = UDim2.new(1, 0, 0, 50)
+	TextButton.Size = UDim2.new(1, 0, 0, 40)
 
 	TextLabel.Parent = TextButton
 	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	TextLabel.BackgroundTransparency = 1.000
 	TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextLabel.BorderSizePixel = 0
-	TextLabel.Position = UDim2.new(0.0302047655, 0, 0.108907469, 0)
-	TextLabel.Size = UDim2.new(0, 219, 0, 38)
+	TextLabel.Position = UDim2.new(0.03, 0,0.5, 0)
+	TextLabel.Size = UDim2.new(0, 218,0, 38)
+	TextLabel.AnchorPoint = Vector2.new(0, 0.5)
 	TextLabel.Font = Enum.Font.RobotoMono
 	TextLabel.Text = Title
 	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -547,7 +465,7 @@ function UI_TRLT2:Slider(Min, Max, default, Title, TaruDimana, smooht, func)
 	FrameAreaSlider.BackgroundTransparency = 0.350
 	FrameAreaSlider.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	FrameAreaSlider.BorderSizePixel = 0
-	FrameAreaSlider.Position = UDim2.new(0.806894302, 0, 0.644453764, 0)
+	FrameAreaSlider.Position = UDim2.new(0.807, 0, 0.7, 0)
 	FrameAreaSlider.Size = UDim2.new(0.34518531, 0, 0.200000003, 0)
 
 	UICorner.CornerRadius = UDim.new(1, 0)
@@ -575,8 +493,8 @@ function UI_TRLT2:Slider(Min, Max, default, Title, TaruDimana, smooht, func)
 	OutputNum.BackgroundTransparency = 1.000
 	OutputNum.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	OutputNum.BorderSizePixel = 0
-	OutputNum.Position = UDim2.new(0.797911167, 0, 0.0979999974, 0)
-	OutputNum.Size = UDim2.new(0.181229055, 0, 0.400000006, 0)
+	OutputNum.Position = UDim2.new(0.795, 0,0.325, 0)
+	OutputNum.Size = UDim2.new(0.181, 0,0.275, 0)
 	OutputNum.Font = Enum.Font.SourceSans
 	OutputNum.Text = tostring(default)
 	OutputNum.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -661,7 +579,7 @@ function UI_TRLT2:Slider(Min, Max, default, Title, TaruDimana, smooht, func)
 	OutputNum.Text = tostring(default)
 end
 
-function UI_TRLT2:Selection(TaruDimana, Title, func, default, Panjang)--game.CoreGui.SRC_Screen.MainFrame.TabFrame[TaruDimana.."ScrollingFrame"]
+function UI_TRLT2:Selection(TaruDimana, Title, default, Panjang, func)--game.CoreGui.TRLT_DuaScreen.MainFrame.TabFrame[TaruDimana.."ScrollingFrame"]
 	local TextButton = Instance.new("TextButton")
 	local TextLabel = Instance.new("TextLabel")
 	local UICorner = Instance.new("UICorner")
@@ -678,16 +596,16 @@ function UI_TRLT2:Selection(TaruDimana, Title, func, default, Panjang)--game.Cor
 	local e = false
 
 	local fr = Instance.new("Frame")
-	fr.Parent = game.CoreGui.SRC_Screen.MainFrame.TabFrame[TaruDimana.."ScrollingFrame"]
-	fr.BackgroundTransparency = 1
+	fr.Parent = game.CoreGui.TRLT_DuaScreen.MainFrame.TabFrame[TaruDimana.."ScrollingFrame"]
+	fr.BackgroundTransparency = 0.550
 	fr.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
 	fr.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	fr.BorderSizePixel = 0
-	fr.Size = UDim2.new(1, 0, 0, 50)
+	fr.Size = UDim2.new(1, 0, 0, 40)
 
 	TextButton.Parent = fr
 	TextButton.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
-	TextButton.BackgroundTransparency = 0.550
+	TextButton.BackgroundTransparency = 1
 	TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextButton.BorderSizePixel = 0
 	TextButton.Position = UDim2.new(0,0,0,0)
@@ -702,8 +620,8 @@ function UI_TRLT2:Selection(TaruDimana, Title, func, default, Panjang)--game.Cor
 	TextLabel.BackgroundTransparency = 1.000
 	TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextLabel.BorderSizePixel = 0
-	TextLabel.Position = UDim2.new(0, 11, 0, 5)
-	TextLabel.Size = UDim2.new(0, 316, 0, 38)
+	TextLabel.Position = UDim2.new(0, 10,0, 0)
+	TextLabel.Size = UDim2.new(0, 306,0, 38)
 	TextLabel.Font = Enum.Font.RobotoMono
 	TextLabel.Text = Title..": "..default
 	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -712,7 +630,7 @@ function UI_TRLT2:Selection(TaruDimana, Title, func, default, Panjang)--game.Cor
 	TextLabel.TextWrapped = true
 	TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-	UICorner.Parent = TextButton
+	UICorner.Parent = fr
 
 	ImageLabel.Parent = TextButton
 	ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -720,10 +638,15 @@ function UI_TRLT2:Selection(TaruDimana, Title, func, default, Panjang)--game.Cor
 	ImageLabel.BackgroundTransparency = 1.000
 	ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	ImageLabel.BorderSizePixel = 0
-	ImageLabel.Position = UDim2.new(0, 366, 0, 24)
+	ImageLabel.Position = UDim2.new(0, 369,0, 19)
 	ImageLabel.Rotation = 180.000
-	ImageLabel.Size = UDim2.new(0, 33, 0, 28)
+	ImageLabel.Size = UDim2.new(0, 25, 0, 25)
 	ImageLabel.Image = "rbxassetid://1248849582"
+
+	local we = Instance.new("UIAspectRatioConstraint", ImageLabel)
+	we.AspectType = Enum.AspectType.FitWithinMaxSize
+	we.DominantAxis = Enum.DominantAxis.Height
+	we.AspectRatio = 1.14
 
 	UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(159, 113, 113)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(159, 113, 113))}
 	UIGradient.Parent = ImageLabel
@@ -775,7 +698,7 @@ function UI_TRLT2:Selection(TaruDimana, Title, func, default, Panjang)--game.Cor
 			ScrollingFrame.Visible = false
 			tw:Create(Frame, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
 			wait(0.3)
-			tw:Create(TextButton, TweenInfo.new(0.3), {Size = UDim2.new(1,0,0,50)}):Play()
+			tw:Create(fr, TweenInfo.new(0.3), {Size = UDim2.new(1,0,0,40)}):Play()
 			tw:Create(ImageLabel, TweenInfo.new(0.3), {Rotation = 180}):Play()
 			task.wait(0.32)
 			coldown = false
@@ -790,7 +713,7 @@ function UI_TRLT2:Selection(TaruDimana, Title, func, default, Panjang)--game.Cor
 				ScrollingFrame.Visible = false
 				tw:Create(Frame, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
 				wait(0.3)
-				tw:Create(fr, TweenInfo.new(0.3), {Size = UDim2.new(1,0,0,50)}):Play()
+				tw:Create(fr, TweenInfo.new(0.3), {Size = UDim2.new(1,0,0,40)}):Play()
 				tw:Create(ImageLabel, TweenInfo.new(0.3), {Rotation = 180}):Play()
 			else
 				e = true 
@@ -862,12 +785,12 @@ function UI_TRLT2:Selection(TaruDimana, Title, func, default, Panjang)--game.Cor
 	return obj
 end
 
-function UI_TRLT2:Label(TItle, taru)
+function UI_TRLT2:Label(taru,TItle)
 	local TextLabel = Instance.new("TextLabel")
 	local UICorner = Instance.new("UICorner")
 
 	local fr = Instance.new("Frame")
-	fr.Parent = game.CoreGui.SRC_Screen.MainFrame.TabFrame[taru.."ScrollingFrame"]
+	fr.Parent = game.CoreGui.TRLT_DuaScreen.MainFrame.TabFrame[taru.."ScrollingFrame"]
 	fr.BackgroundTransparency = 1
 	fr.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
 	fr.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -890,44 +813,48 @@ function UI_TRLT2:Label(TItle, taru)
 	UICorner.Parent = TextLabel
 end
 
-function UI_TRLT2:Button(Title, TitleTwo, Taru, func)
+function UI_TRLT2:Button(Taru, Title, TitleTwo, func)
+	local Frame = Instance.new("Frame")
 	local TextButton = Instance.new("TextButton")
 	local TextLabel = Instance.new("TextLabel")
 	local UICorner = Instance.new("UICorner")
 	local TextLabel_2 = Instance.new("TextLabel")
 	local UICorner_2 = Instance.new("UICorner")
+	local UICorner_3 = Instance.new("UICorner")
 
-	local fr = Instance.new("Frame")
-	fr.Parent = game.CoreGui.SRC_Screen.MainFrame.TabFrame[Taru.."ScrollingFrame"]
-	fr.BackgroundTransparency = 1
-	fr.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
-	fr.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	fr.BorderSizePixel = 0
-	fr.Size = UDim2.new(1, 0, 0, 50)
+	--Properties:
 
-	TextButton.Parent = fr
+	Frame.Parent = game.CoreGui.TRLT_DuaScreen.MainFrame.TabFrame:WaitForChild(Taru.."ScrollingFrame")
+	Frame.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+	Frame.BackgroundTransparency = 0.550
+	Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Frame.BorderSizePixel = 0
+	Frame.Size = UDim2.new(1, 0, 0, 40)
+
+	TextButton.Parent = Frame
 	TextButton.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
-	TextButton.BackgroundTransparency = 0.550
+	TextButton.BackgroundTransparency = 1.000
 	TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextButton.BorderSizePixel = 0
-	TextButton.Size = UDim2.new(1, 0, 0, 50)
+	TextButton.Size = UDim2.new(1, 0, 1, 0)
 	TextButton.Font = Enum.Font.SourceSans
 	TextButton.Text = ""
 	TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 	TextButton.TextSize = 14.000
 
 	TextLabel.Parent = TextButton
+	TextLabel.AnchorPoint = Vector2.new(0, 0.5)
 	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	TextLabel.BackgroundTransparency = 1.000
 	TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextLabel.BorderSizePixel = 0
-	TextLabel.Position = UDim2.new(0.0302048419, 0, 0.108907469, 0)
-	TextLabel.Size = UDim2.new(0, 285, 0, 38)
+	TextLabel.Position = UDim2.new(0.0302048419, 0, 0.5, 0)
+	TextLabel.Size = UDim2.new(0.717365026, 0, 0.949999988, 0)
 	TextLabel.Font = Enum.Font.RobotoMono
 	TextLabel.Text = Title
 	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 	TextLabel.TextScaled = true
-	TextLabel.TextSize = 14.000
+	TextLabel.TextSize = 30.000
 	TextLabel.TextWrapped = true
 	TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -939,17 +866,19 @@ function UI_TRLT2:Button(Title, TitleTwo, Taru, func)
 	TextLabel_2.BackgroundTransparency = 0.650
 	TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextLabel_2.BorderSizePixel = 0
-	TextLabel_2.Position = UDim2.new(0.870000005, 0, 0.483999997, 0)
+	TextLabel_2.Position = UDim2.new(0.870000005, 0, 0.5, 0)
 	TextLabel_2.Size = UDim2.new(0.218999997, 0, 0.768999994, 0)
 	TextLabel_2.Font = Enum.Font.SourceSans
 	TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel_2.Text = TitleTwo
 	TextLabel_2.TextScaled = true
 	TextLabel_2.TextSize = 44.000
 	TextLabel_2.TextWrapped = true
-	TextLabel_2.Text = TitleTwo
 
 	UICorner_2.CornerRadius = UDim.new(0, 5)
 	UICorner_2.Parent = TextLabel_2
+
+	UICorner_3.Parent = Frame
 
 	TextButton.MouseButton1Click:Connect(function()
 		if func then
@@ -962,13 +891,13 @@ end
 
 function UI_TRLT2:Notif(Text)
 	local twens = game:GetService("TweenService")
-	if not game.CoreGui.SRC_Screen:FindFirstChild("Notif") then
+	if not game.CoreGui.TRLT_DuaScreen:FindFirstChild("Notif") then
 		local Frame = Instance.new("Frame")
 		local s = Instance.new("UIListLayout")
-		Frame.Parent = game.CoreGui.SRC_Screen
+		Frame.Parent = game.CoreGui.TRLT_DuaScreen
 		Frame.Name = "Notif"
 		Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-		Frame.BackgroundTransparency = 0.750
+		Frame.BackgroundTransparency = 1
 		Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Frame.BorderSizePixel = 0
 		Frame.Position = UDim2.new(0.00469238777, 0, 0.608037055, 0)
@@ -986,7 +915,7 @@ function UI_TRLT2:Notif(Text)
 	local TextLabel_2 = Instance.new("TextLabel")
 	local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
 
-	Framesd.Parent = game.CoreGui.SRC_Screen.Notif
+	Framesd.Parent = game.CoreGui.TRLT_DuaScreen.Notif
 	Framesd.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Framesd.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Framesd.BorderSizePixel = 0
@@ -1057,7 +986,7 @@ function UI_TRLT2:Notif(Text)
 			end
 		end
 	end)
-	task.wait(1)
+	task.wait(2)
 	if sdw then
 		sdw:Disconnect()
 	end
@@ -1066,7 +995,7 @@ end
 
 function UI_TRLT2:LabelDua(tarupar, Text, maxLine)
 	local fr = Instance.new("Frame")
-	fr.Parent = game.CoreGui.SRC_Screen.MainFrame.TabFrame[tarupar.."ScrollingFrame"]
+	fr.Parent = game.CoreGui.TRLT_DuaScreen.MainFrame.TabFrame[tarupar.."ScrollingFrame"]
 	local TextLabel = Instance.new("TextLabel")
 	local sd = Instance.new("UIPadding", TextLabel)
 
@@ -1096,12 +1025,12 @@ function UI_TRLT2:TextBox(tarupar, Text, func)
 	local UICorner_2 = Instance.new("UICorner")
 	local TextLabel = Instance.new("TextLabel")
 
-	Frame.Parent = game.CoreGui.SRC_Screen.MainFrame.TabFrame[tarupar.."ScrollingFrame"]
+	Frame.Parent = game.CoreGui.TRLT_DuaScreen.MainFrame.TabFrame[tarupar.."ScrollingFrame"]
 	Frame.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
 	Frame.BackgroundTransparency = 0.550
 	Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Frame.BorderSizePixel = 0
-	Frame.Size = UDim2.new(1, 0, 0, 50)
+	Frame.Size = UDim2.new(1, 0, 0, 40)
 
 	UICorner.Parent = Frame
 
@@ -1111,7 +1040,7 @@ function UI_TRLT2:TextBox(tarupar, Text, func)
 	TextBox.BackgroundTransparency = 0.300
 	TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	TextBox.BorderSizePixel = 0
-	TextBox.Position = UDim2.new(0.788268805, 0, 0.484000117, 0)
+	TextBox.Position = UDim2.new(0.788268805, 0, 0.5, 0)
 	TextBox.Size = UDim2.new(0.382462174, 0, 0.768999994, 0)
 	TextBox.Font = Enum.Font.SourceSans
 	TextBox.PlaceholderText = "Masukan Dengan Angka"
@@ -1128,8 +1057,9 @@ function UI_TRLT2:TextBox(tarupar, Text, func)
 	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	TextLabel.BackgroundTransparency = 1.000
 	TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TextLabel.AnchorPoint = Vector2.new(0, 0.5)
 	TextLabel.BorderSizePixel = 0
-	TextLabel.Position = UDim2.new(0.0302048419, 0, 0.108907469, 0)
+	TextLabel.Position = UDim2.new(0.0302048419, 0, 0.5, 0)
 	TextLabel.Size = UDim2.new(0, 218, 0, 38)
 	TextLabel.Font = Enum.Font.RobotoMono
 	TextLabel.Text = Text
@@ -1167,4 +1097,124 @@ function UI_TRLT2:TextBox(tarupar, Text, func)
 	end)
 end
 
-return UI_TRLT2
+function UI_TRLT2:NambahTab(Text, Image, pajang)
+	local TextButton = Instance.new("TextButton")
+	local ImageLabel = Instance.new("ImageLabel")
+	local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+	local TextLabel = Instance.new("TextLabel")
+	local UICorner = Instance.new("UICorner")
+	if game.CoreGui:FindFirstChild("TRLT_DuaScreen") then
+		local w = game.CoreGui:FindFirstChild("TRLT_DuaScreen").MainFrame.FrameKiri.PilihanFrame.ScrollingPilihanFrame
+		TextButton.Parent = w
+		TextButton.BackgroundColor3 = Color3.fromRGB(66, 32, 32)
+		TextButton.BackgroundTransparency = 0.650
+		TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		TextButton.BorderSizePixel = 0
+		TextButton.Size = UDim2.new(0, 200, 0, 50)
+		TextButton.Font = Enum.Font.SourceSans
+		TextButton.Text = ""
+		TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+		TextButton.TextSize = 14.000
+		TextButton.Name = Text.."Button"
+
+		ImageLabel.Parent = TextButton
+		ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		ImageLabel.BackgroundTransparency = 1.000
+		ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		ImageLabel.BorderSizePixel = 0
+		ImageLabel.Size = UDim2.new(1, 0, 1, 0)
+		ImageLabel.Image = "rbxassetid://"..Image
+
+		UIAspectRatioConstraint.Parent = ImageLabel
+
+		TextLabel.Parent = TextButton
+		TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TextLabel.BackgroundTransparency = 1.000
+		TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		TextLabel.BorderSizePixel = 0
+		TextLabel.Position = UDim2.new(0.417075217, 0, 0, 0)
+		TextLabel.Size = UDim2.new(0, 62, 0, 50)
+		TextLabel.Font = Enum.Font.SourceSans
+		TextLabel.Text = Text
+		TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+		TextLabel.TextScaled = true
+		TextLabel.TextSize = 27.000
+		TextLabel.TextWrapped = true
+
+		UICorner.CornerRadius = UDim.new(0, 3)
+		UICorner.Parent = TextButton
+		for _,v in pairs(game.CoreGui:FindFirstChild("TRLT_DuaScreen").MainFrame.TabFrame:GetChildren()) do
+			v.Visible = false
+		end
+		local ScrollingFrame = Instance.new("ScrollingFrame")
+
+		ScrollingFrame.Parent = game.CoreGui:FindFirstChild("TRLT_DuaScreen").MainFrame.TabFrame
+		ScrollingFrame.Active = true
+		ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		ScrollingFrame.BackgroundTransparency = 1.000
+		ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		ScrollingFrame.BorderSizePixel = 0
+		ScrollingFrame.Size = UDim2.new(0.99000001, 0, 1, 0)
+		ScrollingFrame.BottomImage = "rbxassetid://17582895164"
+		ScrollingFrame.MidImage = "rbxassetid://15307205005"
+		ScrollingFrame.ScrollBarThickness = 5
+		ScrollingFrame.CanvasSize = UDim2.new(0, 0, pajang, 0)
+		ScrollingFrame.TopImage = "rbxassetid://17582902069"
+		ScrollingFrame.Name = Text.."ScrollingFrame"
+
+		local s = Instance.new("UIListLayout")
+		s.Wraps = true
+		s.Padding = UDim.new(0,5)
+		s.Parent = ScrollingFrame
+
+		local ui = Instance.new("UIPadding")
+		ui.Parent = ScrollingFrame---------|
+		ui.PaddingBottom = UDim.new(0, 3)--|
+		ui.PaddingRight  = UDim.new(0, 8)--|
+		ui.PaddingLeft   = UDim.new(0, 3)--|
+		ui.PaddingTop    = UDim.new(0, 3)--|
+		game:GetService("CoreGui").TRLT_DuaScreen.MainFrame.NamaTab.Text = Text.."Tab"
+		TextButton.MouseButton1Click:Connect(function()
+			for _,v in pairs(game.CoreGui:FindFirstChild("TRLT_DuaScreen").MainFrame.TabFrame:GetChildren()) do
+				v.Visible = false
+			end
+			ScrollingFrame.Visible = true
+			game:GetService("CoreGui").TRLT_DuaScreen.MainFrame.NamaTab.Text = TextLabel.Text.."Tab"
+		end)
+
+		local rendah = {}
+
+		function rendah:Button(TitleA, TitleB, callback)
+			UI_TRLT2:Button(Text, TitleA, TitleB, callback)
+		end
+
+		function rendah:Label(TitleA)
+			UI_TRLT2:Label(Text, TitleA)
+		end
+
+		function rendah:LabelDua(TitleA, maxLine)
+			UI_TRLT2:LabelDua(Text, TitleA, maxLine)
+		end
+
+		function rendah:TextBox(TitleA, callback)
+			UI_TRLT2:TextBox(Text, TitleA, callback)
+		end
+
+		function rendah:OnOff(TitleA, default, callback)
+			UI_TRLT2:OnOff(Text, TitleA, default, callback)
+		end
+
+		function rendah:Slider(TitleA, Min, Max, default, smooht, callback)
+			UI_TRLT2:Slider(Text, TitleA, Min, Max, default, smooht, callback)
+		end
+
+		function rendah:Selection(TitleA, default, Panjang, callback)
+			UI_TRLT2:Selection(Text, TitleA, default, Panjang, callback)
+		end
+
+		return rendah
+
+	end
+end
+
+return UI_TRLT2 -- jika script orang lain pake Obfuscator dia gay
