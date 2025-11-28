@@ -579,7 +579,7 @@ function UI_TRLT2:Slider(TaruDimana, Title, Min, Max, default, smooht, func)
 	OutputNum.Text = tostring(default)
 end
 
---[[function UI_TRLT2:Selection(TaruDimana, Title, default, Panjang, func)--game.CoreGui.TRLT_DuaScreen.MainFrame.TabFrame[TaruDimana.."ScrollingFrame"]
+function UI_TRLT2:Selection(TaruDimana, Title, default, Panjang, func)--game.CoreGui.TRLT_DuaScreen.MainFrame.TabFrame[TaruDimana.."ScrollingFrame"]
 	local TextButton = Instance.new("TextButton")
 	local TextLabel = Instance.new("TextLabel")
 	local UICorner = Instance.new("UICorner")
@@ -783,7 +783,7 @@ end
 	end
 
 	return obj
-end]]
+end
 
 function UI_TRLT2:Label(taru,TItle)
 	local TextLabel = Instance.new("TextLabel")
@@ -888,7 +888,7 @@ function UI_TRLT2:Button(Taru, Title, TitleTwo, func)
 			end)
 		end
 	end)
-end]]
+end
 
 function UI_TRLT2:Notif(Text)
 	local twens = game:GetService("TweenService")
