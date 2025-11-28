@@ -1217,4 +1217,4 @@ function UI_TRLT2:NambahTab(Text, Image, pajang)
 	end
 end
 
-return UI_TRLT2 -- jika script orang lain pake Obfuscator dia gay
+return UI_TRLT2
