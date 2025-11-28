@@ -783,7 +783,7 @@ end
 	end
 
 	return obj
-end
+end]]
 
 function UI_TRLT2:Label(taru,TItle)
 	local TextLabel = Instance.new("TextLabel")
@@ -1413,7 +1413,7 @@ function UI_TRLT2:NambahTab(Text, Image, pajang)
 		end
 	end
 
-	return obj
+		return obj
 		end
 
 		return rendah
