@@ -972,6 +972,7 @@ function UI_TRLT2:Notif(Text)
 		twens:Create(TextLabel,TweenInfo.new(0.3),{TextTransparency = 1}):Play()
 		twens:Create(TextLabel_2,TweenInfo.new(0.3),{TextTransparency = 1}):Play()
 		twens:Create(Framesd,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
+		Framesd:Destroy()
 	end
 
 	twens:Create(TextLabel,TweenInfo.new(0.3),{TextTransparency = 0}):Play()
