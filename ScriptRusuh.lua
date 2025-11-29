@@ -1,3 +1,7 @@
+if game.CoreGui:FindFirstChild("RusuhTRLT2") then
+	game.CoreGui:FindFirstChild("RusuhTRLT2"):Destroy()
+end
+
 local m = Instance.new("ScreenGui", game.CoreGui)
 local Frame = Instance.new("Frame")
 local UIGradient = Instance.new("UIGradient")
@@ -7,6 +11,8 @@ local TextLabel = Instance.new("TextLabel")
 
 Frame.Active = true
 Frame.Draggable = true
+
+m.Name = "RusuhTRLT2"
 
 Frame.Parent = m
 Frame.AnchorPoint = Vector2.new(0.5, 0.5)
