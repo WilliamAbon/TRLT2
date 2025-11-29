@@ -20,6 +20,10 @@ Script TRLT2 V1.0 adalah script khusus untuk di game lt2/Lumber Tycoon 2. sebena
  ```lua
 loadstring(game:HttpGet("https://raw.githubusercontent.com/WilliamAbon/SRC10101/refs/heads/main/SRC%20Hub%20Yang%20Versi%201.0/Script_LibrarySRC.Lua"))()
 ```
+kalo mau yang TRLT2 Script rusuh
+ ```lua
+loadstring(game:HttpGet("https://raw.githubusercontent.com/WilliamAbon/TRLT2/refs/heads/main/ScriptRusuh.lua"))()
+```
 3. lalu Paste ke executor
 4. dan Jalankan atau Execute
 5. jangan lupa nikmati script nya kwkwk
