@@ -983,6 +983,8 @@ function UI_TRLT2:Notif(Text)
 		if p == "GuiState" then
 			if Framesd.GuiState == Enum.GuiState.Press then
 				tutupudah()
+				wait(0.3)
+				Framesd:Destroy()
 				sdw:Disconnect()
 			end
 		end
@@ -991,6 +993,7 @@ function UI_TRLT2:Notif(Text)
 	if sdw then
 		sdw:Disconnect()
 	end
+	Framesd:Destroy()
 	tutupudah()
 end
 
