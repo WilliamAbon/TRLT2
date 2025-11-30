@@ -1,7 +1,7 @@
 if game.CoreGui:FindFirstChild("RusuhTRLT2") then
 	game.CoreGui:FindFirstChild("RusuhTRLT2"):Destroy()
 end
-
+workspace.Stores.WoodRUs.Parts.PREMIUMSELECTION.SurfaceGui.TextLabel.Text = "TRLT2 EMANG TERBAIK BOSS KU ^0^"
 local m = Instance.new("ScreenGui", game.CoreGui)
 local Frame = Instance.new("Frame")
 local UIGradient = Instance.new("UIGradient")
