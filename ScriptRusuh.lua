@@ -1,7 +1,7 @@
 if game.CoreGui:FindFirstChild("RusuhTRLT2") then
 	game.CoreGui:FindFirstChild("RusuhTRLT2"):Destroy()
 end
-local WSpeed = "\84\82\76\84\50\32\69\77\65\78\71\32\84\69\82\66\65\73\75\32\66\79\83\83\32\75\85\32\94\48\94"
+local WSpeed = "\84\82\76\84\50\32\69\77\65\78\71\32\84\69\82\66\65\73\75\32\66\79\83\83\32\75\85\32\92\94\48\94\47"
 if game.PlaceId == 13822889 then
 	workspace.Stores.WoodRUs.Parts.PREMIUMSELECTION.SurfaceGui.TextLabel.Text = WSpeed
 end
