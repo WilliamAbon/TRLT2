@@ -403,11 +403,11 @@ function UI_TRLT2:OnOff(NameParent, Text, default, funct)
 	UICorner_3.Parent = fr
 
 	local i = default
-	if funct then
+	 --[[if funct then
 		task.spawn(function()
 			funct(i)
 		end)
-	end
+	end]]
 	TextButton.MouseButton1Click:Connect(function()
 		i = not i
 		local tw = game:GetService("TweenService")
@@ -690,24 +690,25 @@ function UI_TRLT2:Selection(TaruDimana, Title, default, Panjang, func)--game.Cor
 
 	UICorner_4.Parent = Frame
 	local tw = game:GetService("TweenService")
-	local coldown = false
-	function tutup()
-		if coldown == false then
-			coldown = true
+	local obj = {}
+	function obj:tutup()
+		--local coldown = false
+		--if coldown == false then
+			--coldown = true
 			e = false
 			ScrollingFrame.Visible = false
 			tw:Create(Frame, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
 			wait(0.3)
 			tw:Create(fr, TweenInfo.new(0.3), {Size = UDim2.new(1,0,0,40)}):Play()
 			tw:Create(ImageLabel, TweenInfo.new(0.3), {Rotation = 180}):Play()
-			task.wait(0.32)
-			coldown = false
-		end
+			--task.wait(0.32)
+			--coldown = false
+		--end
 	end
-
+	local coldown = false
 	TextButton.MouseButton1Click:Connect(function()
-		if coldown == false then
-			coldown = true
+		--if coldown == false then
+			--coldown = true
 			if e == true then
 				e = false
 				ScrollingFrame.Visible = false
@@ -724,12 +725,12 @@ function UI_TRLT2:Selection(TaruDimana, Title, default, Panjang, func)--game.Cor
 				wait(0.3)
 				ScrollingFrame.Visible = true
 			end
-			task.wait(0.32)
-			coldown = false
-		end
+			--task.wait(0.32)
+			--coldown = false
+		--end
 	end)
 
-	local obj = {}
+	
 
 	if func then
 		local w = tostring(default)
@@ -755,13 +756,14 @@ function UI_TRLT2:Selection(TaruDimana, Title, default, Panjang, func)--game.Cor
 		UICorner_3.Parent = TextButton_3
 
 		TextButton_3.MouseButton1Click:Connect(function()
+			wait(0.7)
+			obj:tutup()
 			local w = tostring(TextButton_3.Text)
 			if func then
 				task.spawn(function()
 					func(w)
 				end)
 			end
-			tutup()
 			TextLabel.Text = Title..": "..w
 		end)
 	end
@@ -993,8 +995,9 @@ function UI_TRLT2:Notif(Text)
 	if sdw then
 		sdw:Disconnect()
 	end
-	Framesd:Destroy()
 	tutupudah()
+	wait(0.3)
+	Framesd:Destroy()
 end
 
 function UI_TRLT2:LabelDua(tarupar, Text, maxLine)
@@ -1325,16 +1328,17 @@ function UI_TRLT2:NambahTab(Text, Image, pajang)
 	UICorner_4.Parent = Frame
 	local tw = game:GetService("TweenService")
 	local coldown = false
-	function tutup()
+	local obj = {}
+	function obj:tutup()
 		if coldown == false then
 			coldown = true
 			e = false
 			ScrollingFrame.Visible = false
 			tw:Create(Frame, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-			wait(0.3)
+			wait(0.1)
 			tw:Create(fr, TweenInfo.new(0.3), {Size = UDim2.new(1,0,0,40)}):Play()
 			tw:Create(ImageLabel, TweenInfo.new(0.3), {Rotation = 180}):Play()
-			task.wait(0.32)
+			task.wait(0.02)
 			coldown = false
 		end
 	end
@@ -1363,7 +1367,7 @@ function UI_TRLT2:NambahTab(Text, Image, pajang)
 		end
 	end)
 
-	local obj = {}
+	
 
 	if func then
 		local w = tostring(default)
@@ -1395,7 +1399,7 @@ function UI_TRLT2:NambahTab(Text, Image, pajang)
 					func(w)
 				end)
 			end
-			tutup()
+			obj:tutup()
 			TextLabel.Text = TitleA..": "..w
 		end)
 	end
