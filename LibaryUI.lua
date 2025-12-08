@@ -36,7 +36,7 @@ function UI_TRLT2:NambahUI(tinggi)
 		local TextLabel = Instance.new("TextLabel")
 
 		OpenClose.Name = "OpenClose"
-		OpenClose.Parent = game.StarterGui.ScreenGui
+		OpenClose.Parent = ScreenGui
 		OpenClose.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		OpenClose.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		OpenClose.BorderSizePixel = 0
