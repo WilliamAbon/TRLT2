@@ -33,7 +33,7 @@ function UI_TRLT2:NambahUI(tinggi)
 	if use.TouchEnabled then
 		local OpenClose = Instance.new("TextButton")
 		local UIGradients = Instance.new("UIGradient")
-		local TextLabel = Instance.new("TextLabel")
+		local TextLabelAA = Instance.new("TextLabel")
 
 		OpenClose.Name = "OpenClose"
 		OpenClose.Parent = ScreenGui
@@ -51,17 +51,17 @@ function UI_TRLT2:NambahUI(tinggi)
 		UIGradients.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(9, 2, 5)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(39, 8, 8))}
 		UIGradients.Parent = OpenClose
 
-		TextLabel.Parent = OpenClose
-		TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel.BackgroundTransparency = 1.000
-		TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		TextLabel.BorderSizePixel = 0
-		TextLabel.Size = UDim2.new(1, 0, 1, 0)
-		TextLabel.Font = Enum.Font.SourceSans
-		TextLabel.Text = "Open/Close"
-		TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel.TextSize = 12.000
-		TextLabel.TextWrapped = true
+		TextLabelAA.Parent = OpenClose
+		TextLabelAA.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TextLabelAA.BackgroundTransparency = 1.000
+		TextLabelAA.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		TextLabelAA.BorderSizePixel = 0
+		TextLabelAA.Size = UDim2.new(1, 0, 1, 0)
+		TextLabelAA.Font = Enum.Font.SourceSans
+		TextLabelAA.Text = "Open/Close"
+		TextLabelAA.TextColor3 = Color3.fromRGB(255, 255, 255)
+		TextLabelAA.TextSize = 12.000
+		TextLabelAA.TextWrapped = true
 
 		OpenClose.Active = true
 		OpenClose.Draggable = true
