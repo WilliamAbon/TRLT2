@@ -1,0 +1,957 @@
+<roblox version="4"><Meta name="ExplicitAutoJoints">true</Meta><Item class="Folder" referent="0"><Properties><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClasses]]></string><BinaryString name="Tags"></BinaryString></Properties><Item class="ModuleScript" referent="1"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:28
+-- Luau version 6, Types version 3
+-- Time taken: 0.048259 seconds
+
+local any_IsClient_result1_upvr = game:GetService("RunService"):IsClient()
+if any_IsClient_result1_upvr then
+	any_IsClient_result1_upvr = require(game.Players.LocalPlayer.PlayerGui:WaitForChild("Scripts"):WaitForChild("UserInput"))
+end
+SuperAxe = {} -- Setting global
+SuperAxe.__index = SuperAxe
+function SuperAxe.new(arg1) -- Line 18
+	local module_upvr = {}
+	setmetatable(module_upvr, SuperAxe)
+	local var11
+	if not arg1 then
+		return module_upvr
+	end
+	var11 = game.Players.LocalPlayer
+	module_upvr.Player = var11
+	var11 = module_upvr.Player.Character
+	if not var11 then
+		var11 = module_upvr.Player.CharacterAdded:wait()
+	end
+	module_upvr.Character = var11
+	module_upvr.Humanoid = module_upvr.Character:WaitForChild("Humanoid")
+	for i, v in pairs(arg1:GetChildren()) do
+		if v:IsA("LocalScript") then
+		end
+	end
+	if 2 < 0 + 1 then
+		i = game
+		v = module_upvr.Player.Name
+		-- KONSTANTERROR: Expression was reused, decompilation is incorrect
+		i = v.." instanciated axe with "..(0 + 1).." local scripts"
+		i.ReplicatedStorage.Transactions.AddLog:InvokeServer("Exploit", i)
+		arg1:Destroy()
+		return
+	end
+	local any_InvokeServer_result1, any_InvokeServer_result2 = game.ReplicatedStorage.Interaction.ConfirmIdentity:InvokeServer(arg1, arg1.ToolName.Value)
+	if not any_InvokeServer_result1 then
+		game.ReplicatedStorage.Transactions.AddLog:InvokeServer("Exploit", module_upvr.Player.Name.." instanciated axe that could not be confirmed: "..any_InvokeServer_result2)
+		arg1:Destroy()
+		return
+	end
+	module_upvr.Tool = arg1
+	arg1.ToolTip = game.ReplicatedStorage.ClientItemInfo:FindFirstChild(arg1.ToolName.Value).ItemName.Value
+	module_upvr.Tool.Enabled = true
+	module_upvr.Equipped = false
+	module_upvr.Tool.Handle.CanCollide = false
+	module_upvr.SlashSound = Instance.new("Sound")
+	module_upvr.SlashSound.SoundId = "rbxasset://sounds\\swordslash.wav"
+	module_upvr.SlashSound.Pitch = 0.95
+	module_upvr.SlashSound.Volume = 0.25
+	module_upvr.TorsoGyro = Instance.new("BodyGyro")
+	module_upvr.TorsoGyro.Name = "AxeTorsoGyro"
+	module_upvr.TorsoGyro.D = 2
+	module_upvr.TorsoGyro.P = 15000
+	module_upvr.TorsoGyro.maxTorque = Vector3.new(0, 10000, 0)
+	Instance.new("NumberValue", arg1).Name = "Range"
+	module_upvr.ToolEnabledTick = module_upvr.Player.ToolEnableTick
+	module_upvr.InteractPermission = require(game.ReplicatedStorage.Interaction.InteractionPermission)
+	module_upvr.Input = require(module_upvr.Player.PlayerGui.Scripts.UserInput)
+	module_upvr.Tool.Activated:connect(function(...) -- Line 81
+		--[[ Upvalues[1]:
+			[1]: module_upvr (readonly)
+		]]
+		module_upvr:OnActivated(...)
+	end)
+	module_upvr.Tool.Deactivated:connect(function(...) -- Line 82
+		--[[ Upvalues[1]:
+			[1]: module_upvr (readonly)
+		]]
+		module_upvr:OnDeactivated(...)
+	end)
+	module_upvr.Tool.Equipped:connect(function(...) -- Line 83
+		--[[ Upvalues[1]:
+			[1]: module_upvr (readonly)
+		]]
+		module_upvr:onEquipped(...)
+	end)
+	module_upvr.Tool.Unequipped:connect(function(...) -- Line 84
+		--[[ Upvalues[1]:
+			[1]: module_upvr (readonly)
+		]]
+		module_upvr:onUnequipped(...)
+	end)
+	module_upvr.Animations = {}
+	module_upvr.AnimationsSetup = true
+	for _, v_2 in pairs(script:GetChildren()) do
+		if v_2:IsA("Animation") then
+			module_upvr.Animations[v_2.Name] = module_upvr.Humanoid:LoadAnimation(v_2)
+		end
+	end
+	module_upvr.Ping = 0.2
+	return module_upvr
+end
+local var24_upvw = false
+function SuperAxe.OnActivated(arg1) -- Line 125
+	--[[ Upvalues[2]:
+		[1]: any_IsClient_result1_upvr (readonly)
+		[2]: var24_upvw (read and write)
+	]]
+	if arg1.MouseDownLoop then
+		task.cancel(arg1.MouseDownLoop)
+	end
+	local mouse_upvr = arg1.Player:GetMouse()
+	mouse_upvr.TargetFilter = workspace.Effects
+	if any_IsClient_result1_upvr.Device == "Touch" then
+		local var26_upvw = false
+		local var28_upvw
+		var28_upvw = mouse_upvr.Button1Down:Connect(function() -- Line 138
+			--[[ Upvalues[4]:
+				[1]: var26_upvw (read and write)
+				[2]: var28_upvw (read and write)
+				[3]: arg1 (readonly)
+				[4]: mouse_upvr (readonly)
+			]]
+			var26_upvw = true
+			var28_upvw:Disconnect()
+			var28_upvw = nil
+			arg1.MouseButtonUpConnection = mouse_upvr.Button1Up:Connect(function() -- Line 142
+				--[[ Upvalues[1]:
+					[1]: arg1 (copied, readonly)
+				]]
+				arg1:Deactivate()
+			end)
+		end)
+		task.delay(arg1.SwingCooldown * 0.5, function() -- Line 147
+			--[[ Upvalues[3]:
+				[1]: var26_upvw (read and write)
+				[2]: arg1 (readonly)
+				[3]: var28_upvw (read and write)
+			]]
+			if not var26_upvw then
+				arg1:Deactivate()
+				if var28_upvw then
+					var28_upvw:Disconnect()
+				end
+			end
+		end)
+	end
+	arg1.MouseDownLoop = task.spawn(function() -- Line 157
+		--[[ Upvalues[2]:
+			[1]: arg1 (readonly)
+			[2]: var24_upvw (copied, read and write)
+		]]
+		while true do
+			local tick_result1 = tick()
+			if arg1.ToolEnabledTick.Value < tick_result1 then
+				if not arg1.Character:FindFirstChild("Humanoid") or arg1.Character.Humanoid.Health <= 0 then return end
+				arg1.ToolEnabledTick.Value = tick_result1 + arg1.SwingCooldown
+				local any_AttemptChop_result1, _ = arg1:AttemptChop()
+				if any_AttemptChop_result1 then
+					arg1.ToolEnabledTick.Value = tick_result1 + arg1.SwingCooldown * 1.25
+					task.spawn(function() -- Line 174
+						--[[ Upvalues[2]:
+							[1]: arg1 (copied, readonly)
+							[2]: var24_upvw (copied, read and write)
+						]]
+						arg1:Animate(arg1.Input.GetMouseHit().p)
+						if not var24_upvw then
+							var24_upvw = true
+							task.wait(2)
+							game.ReplicatedStorage.Notices.ShowUserInstruction:Fire("ChoppedWood")
+						end
+					end)
+				else
+					local StringValue = Instance.new("StringValue")
+					StringValue.Name = "toolanim"
+					StringValue.Value = "Slash"
+					StringValue.Parent = arg1.Tool
+					arg1.Tool.Enabled = true
+					arg1.ToolEnabledTick.Value = tick_result1 + arg1.SwingCooldown * 0.3
+				end
+			end
+			task.wait()
+		end
+	end)
+end
+function SuperAxe.OnDeactivated(arg1) -- Line 198
+	--[[ Upvalues[1]:
+		[1]: any_IsClient_result1_upvr (readonly)
+	]]
+	if any_IsClient_result1_upvr.Device ~= "Touch" then
+		arg1:Deactivate()
+	end
+end
+function SuperAxe.Deactivate(arg1) -- Line 204
+	if arg1.MouseDownLoop then
+		task.cancel(arg1.MouseDownLoop)
+		arg1.MouseDownLoop = nil
+		arg1.ToolEnabledTick.Value = arg1.ToolEnabledTick.Value - 0.25 * arg1.SwingCooldown
+	end
+	if arg1.MouseButtonUpConnection then
+		arg1.MouseButtonUpConnection:Disconnect()
+		arg1.MouseButtonUpConnection = nil
+	end
+end
+local GetItem_upvr = require(game.ReplicatedStorage.Util.GetItem)
+function SuperAxe.AttemptChop(arg1) -- Line 217
+	--[[ Upvalues[1]:
+		[1]: GetItem_upvr (readonly)
+	]]
+	-- KONSTANTWARNING: Variable analysis failed. Output will have some incorrect variable assignments
+	local any_GetMouseTarget_result1 = arg1.Input.GetMouseTarget()
+	local var52 = any_GetMouseTarget_result1
+	if var52 then
+		var52 = any_GetMouseTarget_result1.Parent:FindFirstChild("CutEvent")
+	end
+	if any_GetMouseTarget_result1 then
+		if any_GetMouseTarget_result1.Parent:FindFirstChild("TreeClass") then
+			local Value = any_GetMouseTarget_result1.Parent.TreeClass.Value
+		end
+	end
+	local var37_result1 = GetItem_upvr(any_GetMouseTarget_result1)
+	if not var52 or not any_GetMouseTarget_result1:FindFirstChild("ID") or not var37_result1 then return end
+	if not arg1.InteractPermission:UserCanInteract(arg1.Player, var37_result1, "Interact") then return end
+	local p_2 = arg1.Input.GetMouseHit().p
+	local var56 = any_GetMouseTarget_result1.CFrame:pointToObjectSpace(p_2).Y + any_GetMouseTarget_result1.Size.Y / 2
+	local workspace_FindPartOnRay_result1_2, _, workspace_FindPartOnRay_result3 = workspace:FindPartOnRay(Ray.new(arg1.Character.Head.Position, ((any_GetMouseTarget_result1.CFrame * CFrame.new(0, var56 - any_GetMouseTarget_result1.Size.Y / 2, 0)).p - arg1.Character.Head.Position).unit * arg1.Range), arg1.Character)
+	if workspace_FindPartOnRay_result1_2 ~= any_GetMouseTarget_result1 and (not workspace_FindPartOnRay_result1_2 or workspace_FindPartOnRay_result1_2.Parent ~= any_GetMouseTarget_result1.Parent) then return end
+	local fixVector_result1 = fixVector(any_GetMouseTarget_result1.CFrame:vectorToObjectSpace(workspace_FindPartOnRay_result3))
+	if fixVector_result1.Y ~= 0 then return end
+	if 0 <= CFrame.new(arg1.Character.Head.Position, p_2):toObjectSpace(any_GetMouseTarget_result1.CFrame * CFrame.Angles((math.pi/2), 0, 0)).lookVector.Y then
+	else
+	end
+	if fixVector_result1.X == 1 then
+	elseif (Vector3.new(0, 0, -1) * -1).X == -1 then
+		-- KONSTANTERROR: Expression was reused, decompilation is incorrect
+	elseif (Vector3.new(0, 0, 1) * -1).Z == 1 then
+		-- KONSTANTERROR: Expression was reused, decompilation is incorrect
+	elseif (Vector3.new(1, 0, 0) * -1).Z == -1 then
+		-- KONSTANTERROR: Expression was reused, decompilation is incorrect
+	end
+	arg1.TargetWood = any_GetMouseTarget_result1.Parent
+	local var61
+	if arg1.SpecialTrees and arg1.SpecialTrees[Value] then
+		var61 = arg1.SpecialTrees[Value].Damage or var61
+	elseif arg1.OnProcessedWood and any_GetMouseTarget_result1:IsDescendantOf(workspace.PlayerModels) then
+		var61 = arg1.OnProcessedWood.Damage or var61
+	end
+	game.ReplicatedStorage.Interaction.RemoteProxy:FireServer(var52, {
+		sectionId = any_GetMouseTarget_result1.ID.Value;
+		faceVector = Vector3.new(-1, 0, 0) * -1;
+		height = var56;
+		hitPoints = var61;
+		cooldown = 0.65 * (arg1.OnProcessedWood.SwingCooldown or arg1.SpecialTrees[Value].SwingCooldown or arg1.SwingCooldown) - arg1.Ping;
+		cuttingClass = "Axe";
+		tool = arg1.Tool;
+	})
+	return true
+end
+function fixVector(arg1) -- Line 292
+	return Vector3.new(math.floor(arg1.X + 0.5), math.floor(arg1.Y + 0.5), math.floor(arg1.Z + 0.5))
+end
+local var63_upvw = 0
+local any_WaitForReady_result1_upvr = require(game.ReplicatedStorage:WaitForChild("ChinaPolicyService")):WaitForReady()
+function SuperAxe.Animate(arg1, arg2) -- Line 300
+	--[[ Upvalues[2]:
+		[1]: var63_upvw (read and write)
+		[2]: any_WaitForReady_result1_upvr (readonly)
+	]]
+	-- KONSTANTERROR: [0] 1. Error Block 37 start (CF ANALYSIS FAILED)
+	var63_upvw = tick()
+	local var67
+	if not arg1.Character.HumanoidRootPart:FindFirstChild("TorsoGyro") then
+		var67 = Enum.HumanoidStateType.Seated
+		if arg1.Humanoid:GetState() ~= var67 then
+			var67 = CFrame.new(arg1.Character.HumanoidRootPart.Position, arg2)
+			arg1.TorsoGyro.cframe = var67
+			var67 = arg1.Character.HumanoidRootPart
+			arg1.TorsoGyro.Parent = var67
+		end
+	end
+	var67 = arg1.Character.Head.CFrame:pointToObjectSpace(arg2)
+	local unit_2 = var67.unit
+	if unit_2.Y < -0.6 then
+		var67 = "AxeSwing1"
+		-- KONSTANTWARNING: GOTO [92] #60
+	end
+	-- KONSTANTERROR: [0] 1. Error Block 37 end (CF ANALYSIS FAILED)
+	-- KONSTANTERROR: [64] 40. Error Block 38 start (CF ANALYSIS FAILED)
+	if unit_2.Y < -0.2 then
+		var67 = "AxeSwing2"
+	elseif unit_2.Y < 0.2 then
+		var67 = "AxeSwing3"
+	elseif unit_2.Y < 0.6 then
+		var67 = "AxeSwing4"
+	else
+		var67 = false
+		if unit_2.Y < 1 then
+			var67 = "AxeSwing5"
+		end
+	end
+	if not any_WaitForReady_result1_upvr then
+		arg1.Animations[var67]:Play(0.1, 1, 1 / arg1.SwingCooldown)
+	end
+	arg1.SlashSound:play()
+	task.wait(0.8)
+	if var63_upvw == var63_upvw then
+		arg1.TorsoGyro.Parent = nil
+	end
+	-- KONSTANTERROR: [64] 40. Error Block 38 end (CF ANALYSIS FAILED)
+end
+function SuperAxe.onEquipped(arg1) -- Line 334
+	arg1.Equipped = true
+	local Range = arg1.Range
+	if not Range then
+		Range = arg1.Tool.Range.Value
+	end
+	arg1.Tool.Range.Value = Range
+	task.wait()
+	game.ReplicatedStorage.TestPing:InvokeServer()
+	arg1.Ping = (tick() - tick()) / 2
+end
+function SuperAxe.onUnequipped(arg1) -- Line 347
+	arg1.Equipped = false
+	arg1.TorsoGyro.Parent = nil
+	arg1:Deactivate()
+	for _, v_3 in pairs(arg1.Animations) do
+		v_3:Stop()
+	end
+end
+return SuperAxe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeSuperClass]]></string><BinaryString name="Tags"></BinaryString></Properties><Item class="Animation" referent="2"><Properties><Content name="AnimationId"><url><![CDATA[http://www.roblox.com/Asset?ID=260880809]]></url></Content><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeSwing5]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="Animation" referent="3"><Properties><Content name="AnimationId"><url><![CDATA[http://www.roblox.com/Asset?ID=260880729]]></url></Content><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeSwing4]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="Animation" referent="4"><Properties><Content name="AnimationId"><url><![CDATA[http://www.roblox.com/Asset?ID=260880660]]></url></Content><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeSwing3]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="Animation" referent="5"><Properties><Content name="AnimationId"><url><![CDATA[http://www.roblox.com/Asset?ID=260880606]]></url></Content><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeSwing2]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="Animation" referent="6"><Properties><Content name="AnimationId"><url><![CDATA[http://www.roblox.com/Asset?ID=260880531]]></url></Content><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeSwing1]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="Animation" referent="7"><Properties><Content name="AnimationId"><url><![CDATA[http://www.roblox.com/Asset?ID=260880293]]></url></Content><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeHold]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="Animation" referent="8"><Properties><Content name="AnimationId"><url><![CDATA[http://www.roblox.com/Asset?ID=260880403]]></url></Content><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeCarry]]></string><BinaryString name="Tags"></BinaryString></Properties></Item></Item><Item class="ModuleScript" referent="9"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:31
+-- Luau version 6, Types version 3
+-- Time taken: 0.001034 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0.2
+	SuperAxe_new_result1.Range = 10
+	SuperAxe_new_result1.SwingCooldown = 0.65
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_BasicHatchet]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="10"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:32
+-- Luau version 6, Types version 3
+-- Time taken: 0.001028 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0.55
+	SuperAxe_new_result1.Range = 10
+	SuperAxe_new_result1.SwingCooldown = 0.73
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_Axe1]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="11"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:32
+-- Luau version 6, Types version 3
+-- Time taken: 0.001058 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0.93
+	SuperAxe_new_result1.Range = 10
+	SuperAxe_new_result1.SwingCooldown = 0.7
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_Axe2]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="12"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:34
+-- Luau version 6, Types version 3
+-- Time taken: 0.001063 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 1.5
+	SuperAxe_new_result1.Range = 10
+	SuperAxe_new_result1.SwingCooldown = 0.5
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_AxeAlphaTesters]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="13"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:35
+-- Luau version 6, Types version 3
+-- Time taken: 0.001026 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 1.68
+	SuperAxe_new_result1.Range = 9
+	SuperAxe_new_result1.SwingCooldown = 0.4
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_Rukiryaxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="14"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:36
+-- Luau version 6, Types version 3
+-- Time taken: 0.001318 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 1.45
+	SuperAxe_new_result1.Range = 10
+	SuperAxe_new_result1.SwingCooldown = 0.65
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_Axe3]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="15"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:37
+-- Luau version 6, Types version 3
+-- Time taken: 0.001044 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 1.45
+	SuperAxe_new_result1.Range = 10
+	SuperAxe_new_result1.SwingCooldown = 0.54
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_AxeBetaTesters]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="16"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:38
+-- Luau version 6, Types version 3
+-- Time taken: 0.001268 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0.6
+	SuperAxe_new_result1.Range = 9
+	SuperAxe_new_result1.SwingCooldown = 0.55
+	SuperAxe_new_result1.SpecialTrees = {}
+	SuperAxe_new_result1.SpecialTrees.Volcano = {}
+	SuperAxe_new_result1.SpecialTrees.Volcano.Damage = 6.35
+	SuperAxe_new_result1.SpecialTrees.Volcano.SwingCooldown = 0.35
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_FireAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="17"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:39
+-- Luau version 6, Types version 3
+-- Time taken: 0.001603 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 1.6
+	SuperAxe_new_result1.Range = 10
+	SuperAxe_new_result1.SwingCooldown = 0.48
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_SilverAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="18"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:40
+-- Luau version 6, Types version 3
+-- Time taken: 0.001833 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0.8
+	SuperAxe_new_result1.Range = 9
+	SuperAxe_new_result1.SwingCooldown = 0.55
+	SuperAxe_new_result1.SpecialTrees = {}
+	SuperAxe_new_result1.SpecialTrees.GoldSwampy = {}
+	SuperAxe_new_result1.SpecialTrees.GoldSwampy.Damage = 5.35
+	SuperAxe_new_result1.SpecialTrees.GoldSwampy.SwingCooldown = 0.35
+	SuperAxe_new_result1.SpecialTrees.GreenSwampy = {}
+	SuperAxe_new_result1.SpecialTrees.GreenSwampy.Damage = 7
+	SuperAxe_new_result1.SpecialTrees.GreenSwampy.SwingCooldown = 0.46
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_AxeSwamp]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="19"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:41
+-- Luau version 6, Types version 3
+-- Time taken: 0.001040 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0.9
+	SuperAxe_new_result1.Range = 10
+	SuperAxe_new_result1.SwingCooldown = 0.3
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_AxeChicken]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="20"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:43
+-- Luau version 6, Types version 3
+-- Time taken: 0.001142 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0
+	SuperAxe_new_result1.Range = 6
+	SuperAxe_new_result1.SwingCooldown = 0.7
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_CandyCaneAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="21"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:44
+-- Luau version 6, Types version 3
+-- Time taken: 0.001645 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(arg1, ...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(arg1, ...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 1.4
+	SuperAxe_new_result1.Range = 13
+	SuperAxe_new_result1.SwingCooldown = 0.5
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_Beesaxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="22"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:45
+-- Luau version 6, Types version 3
+-- Time taken: 0.001033 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 3.39
+	SuperAxe_new_result1.Range = 9
+	SuperAxe_new_result1.SwingCooldown = 1
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_AxeAmber]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="23"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:46
+-- Luau version 6, Types version 3
+-- Time taken: 0.001645 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 1.2
+	SuperAxe_new_result1.Range = 32
+	SuperAxe_new_result1.SwingCooldown = 0.5
+	SuperAxe_new_result1.SpecialTrees = {}
+	SuperAxe_new_result1.SpecialTrees.Koa = {}
+	SuperAxe_new_result1.SpecialTrees.Koa.Damage = 11
+	SuperAxe_new_result1.SpecialTrees.Koa.SwingCooldown = 0.4
+	SuperAxe_new_result1.SpecialTrees.Walnut = {}
+	SuperAxe_new_result1.SpecialTrees.Walnut.Damage = 8.5
+	SuperAxe_new_result1.SpecialTrees.Walnut.SwingCooldown = 0.4
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_GingerbreadAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="24"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:47
+-- Luau version 6, Types version 3
+-- Time taken: 0.001075 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(arg1, ...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(arg1, ...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 10.2
+	SuperAxe_new_result1.Range = 16
+	SuperAxe_new_result1.SwingCooldown = 1.9
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_ManyAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="25"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:48
+-- Luau version 6, Types version 3
+-- Time taken: 0.001332 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 1.65
+	SuperAxe_new_result1.Range = 16
+	SuperAxe_new_result1.SwingCooldown = 0.4
+	SuperAxe_new_result1.SpecialTrees = {}
+	SuperAxe_new_result1.SpecialTrees.Volcano = {
+		Damage = 2.5;
+		SwingCooldown = 0.4;
+	}
+	SuperAxe_new_result1.SpecialTrees.CaveCrawler = {
+		Damage = 3.9;
+		SwingCooldown = 0.4;
+	}
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_AxeTwitter]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="26"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:49
+-- Luau version 6, Types version 3
+-- Time taken: 0.001414 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0.55
+	SuperAxe_new_result1.Range = 10
+	SuperAxe_new_result1.SwingCooldown = 0.4
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_RustyAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="27"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:50
+-- Luau version 6, Types version 3
+-- Time taken: 0.001409 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0.4
+	SuperAxe_new_result1.Range = 10
+	SuperAxe_new_result1.SwingCooldown = 0.4
+	SuperAxe_new_result1.SpecialTrees = {}
+	SuperAxe_new_result1.SpecialTrees.CaveCrawler = {}
+	SuperAxe_new_result1.SpecialTrees.CaveCrawler.Damage = 7.2
+	SuperAxe_new_result1.SpecialTrees.CaveCrawler.SwingCooldown = 0.22
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_CaveAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="28"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:51
+-- Luau version 6, Types version 3
+-- Time taken: 0.001692 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(arg1, ...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(arg1, ...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 1.75
+	SuperAxe_new_result1.Range = 16
+	SuperAxe_new_result1.SwingCooldown = 0.6
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_CandyCornAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="29"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:52
+-- Luau version 6, Types version 3
+-- Time taken: 0.002467 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1_upvr = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1_upvr, Axe)
+	SuperAxe_new_result1_upvr.Damage = 1.58
+	SuperAxe_new_result1_upvr.Range = 9
+	SuperAxe_new_result1_upvr.SwingCooldown = 0.4
+	SuperAxe_new_result1_upvr.SpecialTrees = {}
+	SuperAxe_new_result1_upvr.SpecialTrees.LoneCave = {
+		SwingCooldown = 0.3;
+	}
+	setmetatable(SuperAxe_new_result1_upvr.SpecialTrees.LoneCave, {
+		__index = function(arg1, arg2) -- Line 27, Named "__index"
+			--[[ Upvalues[1]:
+				[1]: SuperAxe_new_result1_upvr (readonly)
+			]]
+			local TargetWood = SuperAxe_new_result1_upvr.TargetWood
+			if TargetWood then
+				if SuperAxe_new_result1_upvr.TargetWood.Parent ~= workspace.PlayerModels then
+					TargetWood = false
+				else
+					TargetWood = true
+				end
+			end
+			if arg2 == "Damage" then
+				if workspace.Bridge:HasTag("Set") or TargetWood then
+					return 10000000
+				end
+				return 1
+			end
+		end;
+	})
+	return SuperAxe_new_result1_upvr
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_EndTimesAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="30"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:53
+-- Luau version 6, Types version 3
+-- Time taken: 0.001305 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0.95
+	SuperAxe_new_result1.Range = 15.5
+	SuperAxe_new_result1.SwingCooldown = 0.3
+	SuperAxe_new_result1.SpecialTrees = {}
+	SuperAxe_new_result1.SpecialTrees.Cherry = {}
+	SuperAxe_new_result1.SpecialTrees.Cherry.Damage = 1.9
+	SuperAxe_new_result1.SpecialTrees.Cherry.SwingCooldown = 0.25
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_AxePie]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="31"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:54
+-- Luau version 6, Types version 3
+-- Time taken: 0.001989 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 2.8
+	SuperAxe_new_result1.Range = 12
+	SuperAxe_new_result1.SwingCooldown = 0.8
+	SuperAxe_new_result1.SpecialTrees = {}
+	SuperAxe_new_result1.SpecialTrees.BlueSpruce = {
+		Damage = 12.1;
+		SwingCooldown = 0.68;
+	}
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_BluesteelAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="32"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:55
+-- Luau version 6, Types version 3
+-- Time taken: 0.001086 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0.8
+	SuperAxe_new_result1.Range = 1
+	SuperAxe_new_result1.SwingCooldown = 5
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_MintAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="33"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:57
+-- Luau version 6, Types version 3
+-- Time taken: 0.001346 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 6
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0
+	SuperAxe_new_result1.Range = 13
+	SuperAxe_new_result1.SwingCooldown = 0.6
+	SuperAxe_new_result1.OnProcessedWood = {}
+	SuperAxe_new_result1.OnProcessedWood.Damage = 12
+	SuperAxe_new_result1.OnProcessedWood.SwingCooldown = 0.6
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_RefinedAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item><Item class="ModuleScript" referent="34"><Properties><ProtectedString name="Source"><![CDATA[-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw
+
+-- Decompiler will be improved VERY SOON!
+-- Decompiled with Konstant V2.1, a fast Luau decompiler made in Luau by plusgiant5 (https://discord.gg/brNTY8nX8t)
+-- Decompiled on 2025-12-22 08:07:57
+-- Luau version 6, Types version 3
+-- Time taken: 0.001249 seconds
+
+SuperAxe = require(game.ReplicatedStorage.AxeClasses.AxeSuperClass) -- Setting global
+Axe = {} -- Setting global
+Axe.__index = Axe
+setmetatable(Axe, SuperAxe)
+function Axe.new(...) -- Line 7
+	local SuperAxe_new_result1 = SuperAxe.new(...)
+	setmetatable(SuperAxe_new_result1, Axe)
+	SuperAxe_new_result1.Damage = 0.36
+	SuperAxe_new_result1.Range = 9.2
+	SuperAxe_new_result1.SwingCooldown = 0.4
+	SuperAxe_new_result1.SpecialTrees = {}
+	SuperAxe_new_result1.SpecialTrees.Frost = {}
+	SuperAxe_new_result1.SpecialTrees.Frost.Damage = 6
+	SuperAxe_new_result1.SpecialTrees.Frost.SwingCooldown = 0.31
+	return SuperAxe_new_result1
+end
+return Axe]]></ProtectedString><BinaryString name="AttributesSerialize"></BinaryString><SecurityCapabilities name="Capabilities">0</SecurityCapabilities><bool name="DefinesCapabilities">false</bool><string name="Name"><![CDATA[AxeClass_IceAxe]]></string><BinaryString name="Tags"></BinaryString></Properties></Item></Item><Item class="Script" referent="36"><Properties><string name="Name"><![CDATA[README]]></string><ProtectedString name="Source"><![CDATA[--[[
+		Thank you for using UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw.
+
+		If you didn't save in Binary (rbxl) - it's recommended to save the game right away to take advantage of the binary format & to preserve values of certain properties if you used IgnoreDefaultProperties setting (as they might change in the future).
+		You can do that by going to FILE -> Save to File As -> Make sure File Name ends with .rbxl -> Save
+
+		ServerStorage, ServerScriptService and Server Scripts are IMPOSSIBLE to save because of FilteringEnabled.
+
+		If your player cannot spawn into the game, please move the scripts in StarterPlayer somewhere else or delete them. Then run `game:GetService("Players").CharacterAutoLoads = true`.
+		And use "Play Here" to start game instead of "Play" to spawn your Character where your Camera currently is.
+
+		If the chat system does not work, please use the explorer and delete everything inside the TextChatService/Chat service(s). 
+		Or run `game:GetService("Chat"):ClearAllChildren() game:GetService("TextChatService"):ClearAllChildren()`
+				
+		If Union and MeshPart collisions don't work, run the script below in the Studio Command Bar:
+				
+				
+		local C = game:GetService("CoreGui")
+		local D = Enum.CollisionFidelity.Default
+				
+		for _, v in game:GetDescendants() do
+			if v:IsA("TriangleMeshPart") and not v:IsDescendantOf(C) then
+				v.CollisionFidelity = D
+			end
+		end
+		print("Done")
+				
+		If you can't move the Camera, run this script in the Studio Command Bar:
+			
+		workspace.CurrentCamera.CameraType = Enum.CameraType.Fixed
+		
+		Or Destroy the Camera.
+
+		This file was generated with the following settings:
+		{"SaveBytecode":false,"Callback":false,"ShowStatus":true,"IgnoreDefaultPlayerScripts":true,"NilInstancesFixes":{"BaseWrap":null,"Animator":null,"Attachment":null,"PackageLink":null,"AdPortal":null},"IgnoreList":["CoreGui","CorePackages"],"__DEBUG_MODE":false,"DecompileJobless":false,"IgnoreNotArchivable":true,"RemovePlayerCharacters":true,"Object":null,"DecompileIgnore":["TextChatService",null,null,null,null,null,null],"IgnoreSpecialProperties":false,"TreatUnionsAsParts":false,"IsModel":false,"NilInstances":false,"ExtraInstances":[],"noscripts":false,"ReadMe":true,"OptionsAliases":{"SavePlayers":"IsolatePlayers","IgnoreArchivable":"IgnoreNotArchivable","DecompileTimeout":"timeout","SaveNonCreatable":"SaveNotCreatable","InstancesBlacklist":"IgnoreList","IsolatePlayerGui":"IsolateLocalPlayer","FileName":"FilePath","IgnoreDefaultProps":"IgnoreDefaultProperties"},"scriptcache":true,"SharedStringOverwrite":false,"AlternativeWritefile":false,"mode":"invalidmode","SaveCacheInterval":56320,"IgnoreSharedStrings":true,"IsolatePlayers":false,"NotCreatableFixes":["","AdvancedDragger","AnimationTrack","Dragger","Player","PlayerGui","PlayerMouse","PlayerMouse","PlayerScripts","ScreenshotHud","StudioData","TextChatMessage","TextSource","TouchTransmitter","Translator"],"timeout":10,"IgnoreDefaultProperties":true,"Anonymous":false,"IsolateStarterPlayer":false,"IsolateLocalPlayerCharacter":false,"IgnorePropertiesOfNotScriptsOnScriptsMode":false,"AvoidFileOverwrite":true,"SaveNotCreatable":false,"IsolateLocalPlayer":false,"FilePath":false,"AntiIdle":true,"ShutdownWhenDone":false,"SafeMode":false,"IgnoreProperties":[]}
+
+		Elapsed time: 0.16560930000014196 PlaceId: 13822889 PlaceVersion: 2501 Client Version: 0.702.2.7020633 Executor: Xeno v1.3.10
+]]]]></ProtectedString></Properties></Item></roblox><!-- Saved by UniversalSynSaveInstance (Join to Copy Games) https://discord.gg/wx4ThpAsmw -->
