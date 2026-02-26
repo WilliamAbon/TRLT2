@@ -3,7 +3,7 @@ local mouse = game:GetService("Players").LocalPlayer:GetMouse()
 
 local PlankModule = {}
 
-function PlankModule.Setup(actionName, cooldown, onSelectCallback)
+function PlankModule.Setup(actionName, onSelectCallback)
     CAS:BindAction(
         actionName,
         function(name, state, input)
