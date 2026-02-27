@@ -7,15 +7,9 @@ function PlankModule.Setup(actionName, onSelectCallback)
     CAS:BindAction(
         actionName,
         function(name, state, input)
-            if state ~= Enum.UserInputState.Begin then
-                return Enum.ContextActionResult.Pass
+            if state == Enum.UserInputState.Begin and mouse.Target then
+                onSelectCallback(mouse.Target)
             end
-
-            local target = mouse.Target
-            if onSelectCallback then
-                onSelectCallback(target)
-            end
-
             return Enum.ContextActionResult.Sink
         end,
         true,
@@ -28,4 +22,4 @@ function PlankModule.Cleanup(actionName)
     CAS:UnbindAction(actionName)
 end
 
-return PlankModule
+return PlankModule -- PASTIKAN TIDAK ADA TANDA KURUNG DI SINI
