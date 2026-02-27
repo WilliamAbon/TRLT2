@@ -890,6 +890,13 @@ function UI_TRLT2:Button(Taru, Title, TitleTwo, func)
 			end)
 		end
 	end)
+	local adoaoi = {}
+
+	function adoaoi:TextUbah(xt)
+		TextLabel.Text = xt
+	end
+	
+	return adoaoi
 end
 
 function UI_TRLT2:Notif(Text)
