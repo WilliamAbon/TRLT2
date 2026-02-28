@@ -1,5 +1,6 @@
+
 local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/DEVTRLT2/TRLT2/refs/heads/main/HE%20SICK"))()
-local win = UI:AddedWindows()
+local win = UI:AddedWindows(_G.SettingsUITRLT2)
 
 --[[local Hometab = UI:NambahTab("Home", "83864455957848", 2.5)
 local Duniatab = UI:NambahTab("Dunia", "114005686560621", 1.25)
